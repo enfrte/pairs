@@ -1,0 +1,79 @@
+.App {
+	text-align: center;
+  }
+
+  .app-container {
+	height: 100vh;
+	min-width: 366px;
+	max-width: 600px;
+  }
+
+  .redBorder {
+	border: 2px solid red;
+	box-shadow: 0 0 10px rgba(255,0,0,0.7);
+  }
+  
+  h1 {
+	margin-bottom: 20px;
+  }
+
+  .grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+	grid-gap: 20px;
+	justify-content: center;
+  }
+
+  .grid-3 {
+	grid-template-columns: repeat(3, 100px);
+  }
+
+  .grid-4 {
+	grid-template-columns: repeat(4, 100px);
+  }
+
+  .grid-5 {
+	grid-template-columns: repeat(5, 100px);
+  }
+  
+  .card {
+	width: 100px;
+	height: 100px;
+	perspective: 1000px;
+	cursor: pointer;
+  }
+  
+  .card.flipped .card-inner {
+	transform: rotateY(180deg);
+  }
+  
+  .card-inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	transform-style: preserve-3d;
+	transition: transform 0.6s;
+  }
+  
+  .card-front,
+  .card-back {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 18px;
+	color: white;
+  }
+  
+  .card-front {
+	background-color: #1abc9c;
+  }
+  
+  .card-back {
+	background-color: #34495e;
+	transform: rotateY(180deg);
+  }
+  

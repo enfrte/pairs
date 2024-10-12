@@ -1,0 +1,7 @@
+/pairs_root/vendor/
+/pairs_root/config.php
+installed
+/www/pairs/cache/
+/bun/pairs/node_modules
+database.sqlite
+/cache/

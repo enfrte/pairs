@@ -1,0 +1,12 @@
+{
+    "name": "me/pairs",
+    "autoload": {
+        "psr-4": {
+            "Pairs\\": "../www/pairs/"
+        }
+    },
+    "require": {
+        "flightphp/core": "^3.11",
+        "latte/latte": "^3.0"
+    }
+}

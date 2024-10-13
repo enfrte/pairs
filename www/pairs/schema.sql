@@ -1,8 +1,20 @@
 CREATE TABLE categories (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL
+  name TEXT NOT NULL UNIQUE
 );
 
+-- Insert categories
+INSERT INTO categories (name) VALUES ('animals');
+INSERT INTO categories (name) VALUES ('vehicles');
+
+CREATE TABLE languages (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL UNIQUE
+);
+
+-- Insert languages
+INSERT INTO languages (name) VALUES ('English');
+INSERT INTO languages (name) VALUES ('Finnish');
 
 CREATE TABLE word_pairs (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,15 +30,6 @@ CREATE TABLE word_pairs (
   UNIQUE (language_2, language_2_word, category_id)
 );
 
-CREATE TABLE languages (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL
-);
-
--- Insert categories
-INSERT INTO categories (name) VALUES ('animals');
-INSERT INTO categories (name) VALUES ('vehicles');
-
 -- Insert word pairs
 INSERT INTO word_pairs (language_1,  language_1_word, language_2,  language_2_word, category_id) VALUES (1, 'dog', 2, 'koira', 1);
 INSERT INTO word_pairs (language_1,  language_1_word, language_2,  language_2_word, category_id) VALUES (1, 'cat', 2, 'kissa', 1);
@@ -35,6 +38,3 @@ INSERT INTO word_pairs (language_1,  language_1_word, language_2,  language_2_wo
 INSERT INTO word_pairs (language_1,  language_1_word, language_2,  language_2_word, category_id) VALUES (1, 'house', 2, 'talo', 0);
 INSERT INTO word_pairs (language_1,  language_1_word, language_2,  language_2_word, category_id) VALUES (1, 'beer', 2, 'olut', 0); 
 
--- Insert languages
-INSERT INTO languages (name) VALUES ('English');
-INSERT INTO languages (name) VALUES ('Finnish');

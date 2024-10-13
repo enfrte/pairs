@@ -35,6 +35,7 @@ class InstallController
 			}
 
 			$db = Flight::db();
+			// Note: SQLite operation errors are not thrown as exceptions, so existing tables and constraint violations will be ignored.
 			$db->beginTransaction(); 
 			// Split the schema file into individual statements
 			$statements = array_filter(array_map('trim', explode(';', $schema)));
@@ -58,10 +59,10 @@ class InstallController
 				}
 			}
 
-			if ($db->commit()) {  // If all statements executed successfully, commit the transaction
+			if ($db->commit()) {  
 				$result = "<hr>Finished!";
 			} else {
-				$db->rollBack();  // If any statement failed, rollback the transaction
+				$db->rollBack();  
 				throw new \Exception('Error: Unable to execute schema file.');
 			}
 

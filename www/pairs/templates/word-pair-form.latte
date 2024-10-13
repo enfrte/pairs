@@ -4,11 +4,66 @@
 
 <div class="container app-container text-light">
 
-	<h2 class="mt-5">New pair</h2>
+	<!-- <div id="root" data-page="wordPairForm"></div>
 
-	<div id="root" data-page="wordPairForm"></div>
+	<script type="module" crossorigin src="{Flight::get('basePath')}/assets/index-CjMqPAno.js"></script> -->
 
-	<script type="module" crossorigin src="{Flight::get('basePath')}/assets/index-CjMqPAno.js"></script>
+	<form method="POST" action="{Flight::get('basePath')}/insertWordPair">
+		<h2 class="mt-5">New pair</h2>
+
+		<div class="mb-3">
+			<select class="form-select" id="language_1" name="language_1" required>
+				<option value="">Select language 1</option>
+				<option value="1" selected>English</option>
+				<option value="2">Finnish</option>
+			</select>
+		</div>
+
+		<div class="mb-3">
+			<select class="form-select" id="language_2" name="language_2" required>
+				<option value="">Select language 2</option>
+				<option value="1">English</option>
+				<option value="2" selected>Finnish</option>
+			</select>
+		</div>
+
+		{if !empty($categories)}
+		<div class="mb-3">
+			<select class="form-select" id="category_id" name="category_id">
+				<option value="0" selected>Select a category (optional)</option>
+				{foreach $categories as $category}
+					<option value="{$category->id}">{$category->name}</option>
+				{/foreach}
+			</select>
+		</div>
+		{/if}
+			
+		<div class="mb-3">
+			<input type="text" class="form-control" id="new_category" name="new_category" placeholder="Create new category" />
+		</div>
+		
+		<p>Select a way to separate words</p>
+
+		<div class="mb-3">
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value="1" name="useTabSeparation" id="useTabSeparation" />
+				<label class="form-check-label" for="useTabSeparation">
+					Use tab separation
+				</label>
+			</div>
+		</div>
+		
+		<div class="mb-3">
+			<input type="text" class="form-control" id="separationCharacters" name="separationCharacters" placeholder="Enter vocab separation characters" />
+		</div>
+		
+		<p>Enter a list of words</p>
+
+		<div class="mb-3">
+			<textarea style="height: 300px;" class="form-control" name="pairs" id="pairs" rows="3"></textarea>
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
 	
 </div>
 

@@ -66,7 +66,8 @@ Flight::route('/login', [AccessController::class, 'login']);
 Flight::route('/logout', [AccessController::class, 'logout']);
 Flight::route('/home', [HomeController::class, 'index']);
 Flight::route('/install', [InstallController::class, 'index']);
-Flight::route('/word-pair-form', [NewPairController::class, 'index']);
+Flight::route('/wordPairForm', [NewPairController::class, 'index']);
+Flight::route('/insertWordPair', [NewPairController::class, 'insertWordPair']);
 
 Flight::start();
 

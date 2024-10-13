@@ -13,7 +13,9 @@ CREATE TABLE word_pairs (
   category_id INTEGER NOT NULL,
   FOREIGN KEY (language_1) REFERENCES languages(id),
   FOREIGN KEY (language_2) REFERENCES languages(id)
-  FOREIGN KEY (category_id) REFERENCES categories(id)
+  FOREIGN KEY (category_id) REFERENCES categories(id),
+  UNIQUE (language_1, language_1_word, category_id),
+  UNIQUE (language_2, language_2_word, category_id)
 );
 
 CREATE TABLE languages (
@@ -30,8 +32,8 @@ INSERT INTO word_pairs (language_1,  language_1_word, language_2,  language_2_wo
 INSERT INTO word_pairs (language_1,  language_1_word, language_2,  language_2_word, category_id) VALUES (1, 'cat', 2, 'kissa', 1);
 INSERT INTO word_pairs (language_1,  language_1_word, language_2,  language_2_word, category_id) VALUES (1, 'car', 2, 'auto', 2);
 INSERT INTO word_pairs (language_1,  language_1_word, language_2,  language_2_word, category_id) VALUES (1, 'bike', 2, 'pöyrä', 2);
-INSERT INTO word_pairs (language_1,  language_1_word, language_2,  language_2_word, category_id) VALUES (1, 'house', 2, 'talo', NULL);
-INSERT INTO word_pairs (language_1,  language_1_word, language_2,  language_2_word, category_id) VALUES (1, 'beer', 2, 'olut', NULL); 
+INSERT INTO word_pairs (language_1,  language_1_word, language_2,  language_2_word, category_id) VALUES (1, 'house', 2, 'talo', 0);
+INSERT INTO word_pairs (language_1,  language_1_word, language_2,  language_2_word, category_id) VALUES (1, 'beer', 2, 'olut', 0); 
 
 -- Insert languages
 INSERT INTO languages (name) VALUES ('English');

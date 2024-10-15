@@ -26,18 +26,14 @@ function App() {
       if (first.pairId !== second.pairId) {
         setError(1);
 
-        const firstCard = cards.find(
-          index => index.id === first.id
-        );
-
-        const secondCard = cards.find(
-          index => index.id === second.id
-        );
-        
         setTimeout(() => {
+          setCards(prevCards => {
+            return prevCards.map(c =>
+              c.id === first.id || c.id === second.id ? { ...c, flipped: false } : c
+            );
+          });          
+        
           setFlippedCards([]);
-          firstCard.flipped = false;
-          secondCard.flipped = false;
           setError(0);
         }, 1000);
       }
@@ -54,17 +50,20 @@ function App() {
   function handleCardClick(card) {
     if (card.flipped || flippedCards.length >= 2) return;
 
-    const updatedCard = cards.find(
-      index => index.id === card.id
-    );
-    updatedCard.flipped = true;
+    setCards(prevCards => {
+      console.log("prevCards", prevCards);
+      return prevCards.map(c =>
+        c.id === card.id ? { ...c, flipped: true } : c
+      )
+    });
+    
     setFlippedCards([...flippedCards, card]);
     // console.log(cards);
   }
 
-  function Card({ card, onClick, flipped, flippedCards }) {
+  function Card({ card, onClick, flipped, isError }) {
     return (
-      <div className={`card ${flipped ? "flipped" : ""} ${flippedCards.includes(card) && error ? "redBorder" : ""}`} onClick={onClick}>
+      <div className={`card ${flipped ? "flipped" : ""} ${isError ? "redBorder" : ""}`} onClick={onClick}>
         <div className="card-inner">
           <div className="card-front">?</div>
           <div className="card-back">{card.word}</div>
@@ -84,6 +83,7 @@ function App() {
             onClick={() => handleCardClick(card)}
             flipped={card.flipped}
             flippedCards={flippedCards}
+            isError={error && flippedCards.some(c => c.id === card.id)}
           />
         ))}
       </div>

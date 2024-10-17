@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
-const wordPairs = [ // randomise on backend
+const wordPairs = [ // Will be randomised and come from backend
   { id: 1, pairId: 1, word: "dog", flipped: false },
   { id: 2, pairId: 1, word: "koira", flipped: false },
   { id: 3, pairId: 2, word: "cat", flipped: false },
@@ -15,16 +15,16 @@ const wordPairs = [ // randomise on backend
 ];
 
 function App() {
-  const [cards, setCards] = useState(getCards());
+  const [cards, setCards] = useState(getCards); // getCards can be passed by reference so it is only called once
   const [flippedCards, setFlippedCards] = useState([]); // max of 2 cards flipped at a time
-  const [error, setError] = useState(0);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (flippedCards.length === 2) {
       const [first, second] = flippedCards;
 
       if (first.pairId !== second.pairId) {
-        setError(1);
+        setError(true);
 
         setTimeout(() => {
           setCards(prevCards => {
@@ -34,7 +34,7 @@ function App() {
           });          
         
           setFlippedCards([]);
-          setError(0);
+          setError(false);
         }, 1000);
       }
       else {
@@ -44,7 +44,16 @@ function App() {
   }, [flippedCards]);
 
   function getCards() {
-    return wordPairs; 
+    return wordPairs; // TODO: fetch from backend
+  }
+
+  function getCategories() { // TODO: fetch from backend
+    return [
+      { id: 1, name: "Animals" },
+      { id: 2, name: "Fruits" },
+      { id: 3, name: "Vegetables" },
+      { id: 4, name: "Countries" }
+    ];
   }
 
   function handleCardClick(card) {
@@ -82,7 +91,6 @@ function App() {
             card={card}
             onClick={() => handleCardClick(card)}
             flipped={card.flipped}
-            flippedCards={flippedCards}
             isError={error && flippedCards.some(c => c.id === card.id)}
           />
         ))}

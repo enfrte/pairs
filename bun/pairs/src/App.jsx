@@ -19,7 +19,12 @@ function App() {
   const [flippedCards, setFlippedCards] = useState([]); // max of 2 cards flipped at a time
   const [error, setError] = useState(false);
 
+  // When something updates, useEffect runs, so here would be a good place to check the answer
   useEffect(() => {
+    checkAnswer();
+  }, [flippedCards]);
+
+  function checkAnswer() {
     if (flippedCards.length === 2) {
       const [first, second] = flippedCards;
 
@@ -41,33 +46,17 @@ function App() {
         setFlippedCards([]);
       }
     }
-  }, [flippedCards]);
+  }
 
   function getCards() {
     return wordPairs; // TODO: fetch from backend
   }
 
-  function getCategories() { // TODO: fetch from backend
-    return [
-      { id: 1, name: "Animals" },
-      { id: 2, name: "Fruits" },
-      { id: 3, name: "Vegetables" },
-      { id: 4, name: "Countries" }
-    ];
-  }
-
   function handleCardClick(card) {
     if (card.flipped || flippedCards.length >= 2) return;
 
-    setCards(prevCards => {
-      console.log("prevCards", prevCards);
-      return prevCards.map(c =>
-        c.id === card.id ? { ...c, flipped: true } : c
-      )
-    });
-    
+    setCards(prevCards => prevCards.map(c => c.id === card.id ? { ...c, flipped: true } : c));    
     setFlippedCards([...flippedCards, card]);
-    // console.log(cards);
   }
 
   function Card({ card, onClick, flipped, isError }) {
@@ -83,7 +72,6 @@ function App() {
 
   return (
     <div className="App container app-container">
-      
       <div className="grid grid-3">
         {cards.map(card => (
           <Card
@@ -95,7 +83,6 @@ function App() {
           />
         ))}
       </div>
-
     </div>
   );
 

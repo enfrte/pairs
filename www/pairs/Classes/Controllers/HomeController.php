@@ -23,4 +23,15 @@ class HomeController
         Flight::latte()->render('home.latte', []);
     }
 
+    // Select a game based on a category and language
+    public function selectGame($category, $language) {
+        // Query the word pairs table based on the category and language
+        $sql = 'SELECT * FROM word_pairs WHERE category = :category AND language = :language';
+        $wordPairs = Flight::db()->fetch($sql, [':category' => $category, ':language' => $language]);
+
+        // send json data
+        Flight::json(['wordPairs' => $wordPairs]);
+        // Flight::latte()->render('select-game.latte', []);
+    }
+
 }

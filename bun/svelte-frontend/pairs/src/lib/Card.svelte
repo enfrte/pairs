@@ -4,19 +4,31 @@
 	export let error = false;
 
 	function handleCardClick() {
-		if (card.flipped || flippedCards.length >= 2) return;
+		if (card.flipped || flippedCards.length >= 2) {
+			return;
+		}
+
 		card.flipped = !card.flipped;
 		flippedCards = [...flippedCards, card];
 	}
 
 </script>
 
-<div class="card" class:flipped={card.flipped} class:red-border={error} on:click={handleCardClick}>
-	<div class="card-inner">
-		<div class="card-front"><span class="question-mark">?</span></div>
-		<div class="card-back">{card.word}</div>
-	</div>
-</div>
+<button 
+    type="button" 
+    class="card" 
+    class:flipped={card.flipped} 
+    class:red-border={error} 
+    on:click={handleCardClick}>
+    <span class="card-inner">
+        <span class="card-front">
+            <span class="question-mark">?</span>
+        </span>
+        <span class="card-back">
+            {card.word}
+        </span>
+    </span>
+</button>
 
 <style>
 	.card {
@@ -25,6 +37,8 @@
 		perspective: 1000px;
 		cursor: pointer;
 		border: 4px solid transparent;
+		background: none;
+		padding: 0;
 	}
 
 	.card.flipped .card-inner {
@@ -37,6 +51,7 @@
 		height: 100%;
 		transform-style: preserve-3d;
 		transition: transform 0.4s;
+		display: block;
 	}
 
 	.card-front,
@@ -75,8 +90,8 @@
 		font-size: 24px;
 		border-radius: 50%;
 		background-color: white;
-		width: 24px;
-		height: 24px;
+		width: 36px;
+		height: 36px;
 		display: flex;
 		justify-content: center;
 		align-items: center;

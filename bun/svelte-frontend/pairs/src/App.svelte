@@ -24,6 +24,10 @@
 
 	// Runs each time flippedCards is updated (putting flippedCards in the parent scope of $: achieves this I guess)
 	$: if (flippedCards.length === 2) {	
+		handleFlippedCards();
+	}
+
+	function handleFlippedCards() {
 		const [first, second] = flippedCards;
 
 		if (first.pairId !== second.pairId) {
@@ -39,6 +43,7 @@
 			flippedCards = [];
 		}
 	}
+
 </script>
 
 <div class="App container app-container">
